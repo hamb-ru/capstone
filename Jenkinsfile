@@ -3,11 +3,11 @@ pipeline {
   stages {
     stage('Builds 	') {
       parallel {
-        stage('Build1') {
+        stage('Initial') {
           steps {
-            sh 'echo "Hello World"'
-            sh '''
-                     echo "this is Build stage - the first one"
+            sh 'echo "working directory is -"'
+            pwd
+                     echo "Initial code was cloning from GitHub:"
                      ls -latr
                  '''
           }
@@ -38,7 +38,7 @@ pipeline {
           steps {
             sh 'echo "This is test stage1"'
             sh '''
-                     echo "this is a kind of test stage"
+                     echo "this is a kind of test stage (1)"
                      hostname -f
                  '''
           }
@@ -57,13 +57,16 @@ pipeline {
 
     stage('Lint Dockerfile') {
       steps {
-        sh "hadolint Dockerfile"
+	    sh 'sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64'
+		sh 'sudo chmod +x /bin/hadolint'
+        sh 'hadolint Dockerfile'
       }
     }
 
     stage('Lint HTML') {
       steps {
-        sh 'tidy -q -e nginx/htdocs/*.html'
+        sh 'sudo yum install tidy -y'
+		sh 'tidy -q -e nginx/htdocs/*.html'
       }
     }
 
