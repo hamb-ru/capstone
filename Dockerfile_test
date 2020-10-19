@@ -22,5 +22,5 @@ RUN pip install --trusted-host pypi.python.org pylint
 EXPOSE 8888
 
 ## Step 5:
-# Test command run inside the container
+# Run app.py at container launch
 #CMD ["echo", "docker container is ready"]
