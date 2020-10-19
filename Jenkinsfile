@@ -15,8 +15,6 @@ pipeline {
       }
     }
 
-
-### Do not forget to add credentials in Jenkins to access to Docker hub 'docker'
         stage('Build Docker image and run it locally') {
             steps {
                 sh 'echo "Now building Docker image"'
