@@ -1,0 +1,6 @@
+Flask
+pandas
+pylint
+ipython
+pylint-flask
+
