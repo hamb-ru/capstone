@@ -6,7 +6,8 @@ pipeline {
         stage('Initial') {
           steps {
             sh 'echo "working directory is -"'
-            pwd
+			pwd
+            sh '''
                      echo "Initial code was cloning from GitHub:"
                      ls -latr
                  '''
