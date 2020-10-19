@@ -40,7 +40,8 @@ hadolint:
 	sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64
 	sudo chmod +x /bin/hadolint
 	hadolint --version
-#	hadolint Dockerfile
+#	hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile
+
 
 tidy:
 	# This is linter for HTML

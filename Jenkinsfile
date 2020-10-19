@@ -58,7 +58,7 @@ pipeline {
 
     stage('Lint Dockerfile') {
       steps {
-        sh 'hadolint Dockerfile'
+        sh 'hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile'
       }
     }
 
