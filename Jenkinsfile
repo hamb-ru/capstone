@@ -58,15 +58,12 @@ pipeline {
 
     stage('Lint Dockerfile') {
       steps {
-	    sh 'sudo wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.18.0/hadolint-Linux-x86_64'
-		sh 'sudo chmod +x /bin/hadolint'
         sh 'hadolint Dockerfile'
       }
     }
 
     stage('Lint HTML') {
       steps {
-        sh 'sudo yum install tidy -y'
 		sh 'tidy -q -e nginx/htdocs/*.html'
       }
     }

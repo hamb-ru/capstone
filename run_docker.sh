@@ -10,4 +10,4 @@ docker image ls
 
 # Step 3: 
 # Run nginx container
-docker run -p 80:80 capstone
+docker run -p 8888:8888 capstone

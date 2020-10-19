@@ -18,7 +18,7 @@ RUN pip install --upgrade pip
 RUN pip install --trusted-host pypi.python.org pylint 
 
 ## Step 4:
-# Expose port 80
+# Expose port 8888
 EXPOSE 8888
 
 ## Step 5:
