@@ -42,6 +42,12 @@ hadolint:
 	hadolint --version
 #	hadolint Dockerfile
 
+tidy:
+	# This is linter for HTML
+	sudo yum install tidy -y 
+	tidy --version
+#	tidy nginx/htdocs/*.html
+
 k8s:
 # kubernetes - Minikube
 	curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl

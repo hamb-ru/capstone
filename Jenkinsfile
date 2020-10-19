@@ -22,36 +22,23 @@ pipeline {
                     sh "docker login -u ${env.dockerUsername} -p ${env.dockerPassword}"
                     sh "echo 'remove docker container if exists'"
                     sh "docker rm -f capstone || true"
-                    sh "docker build --tag ${env.dockerUsername}/capstone:1.0 ."
-                    sh "docker push ${env.dockerUsername}/capstone:1.0"
-                    sh "docker run -d -p 8000:80 --name capstone ${env.dockerUsername}/capstone"
+                    sh "docker build --tag ${env.dockerUsername}/capstone ."
+                    sh "docker push ${env.dockerUsername}/capstone"
+                    sh "docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone"
+					sh "date >> docker_ps.output"
+					sh "docker ps >> docker_ps.output"
                 }
             }
         }
 
 
-
-    stage('Development') {
-      parallel {
-        stage('Development1') {
-          steps {
-            sh 'echo "This is dev stage1"'
-            sh '''
-                     echo "this is a kind of test"
-                     hostname -f
-                 '''
-          }
-        }
-      }
-    }
-
     stage('Staging') {
       parallel {
         stage('Staging1') {
           steps {
-            sh 'echo "This is test stage"'
+            sh 'echo "This is test stage1"'
             sh '''
-                     echo "this is a kind of test"
+                     echo "this is a kind of test stage"
                      hostname -f
                  '''
           }
@@ -68,22 +55,21 @@ pipeline {
       }
     }
 
-    stage('Linting') {
+    stage('Lint Dockerfile') {
       steps {
         sh "hadolint Dockerfile"
-        sh "tidy -q -e *.html"
       }
     }
 
     stage('Lint HTML') {
       steps {
-        sh 'tidy -q -e *.html'
+        sh 'tidy -q -e nginx/htdocs/*.html'
       }
     }
 
     stage('Security Scan') {
       steps {
-        aquaMicroscanner(imageName: 'alpine:latest', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
+        aquaMicroscanner(imageName: 'nginx:alpine', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
       }
     }
 
@@ -91,8 +77,8 @@ pipeline {
       steps {
         withAWS(region: 'us-west-2', credentials: 'aws-static') {
           sh 'echo "Uploading content with AWS creds"'
-          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', bucket: 'dmalinov-project3')
-          s3Upload(file: 'jenkins-x.jpg', bucket: 'dmalinov-project3')
+          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', bucket: 'dmalinov-capstone')
+          s3Upload(file: 'docker_ps.output', bucket: 'dmalinov-capstone')
         }
 
       }
