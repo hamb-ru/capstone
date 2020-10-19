@@ -24,4 +24,8 @@ EXPOSE 80
 
 ## Step 5:
 # Run app.py at container launch
+<<<<<<< HEAD
 CMD ["echo", "docker container is ready"]
+=======
+CMD ["echo", "docker container is ready"]  
+>>>>>>> 76397a2ed88dd2cc0d4bb3fe4ec11a6082fa0d7e
