@@ -85,7 +85,15 @@ It will have following steps:
 ## CD Pipeline
 - Deploy kubernetes cluster to local minikube
 or
-- Deploy kubernetes cluster to AWS EKS
-
+- Deploy kubernetes cluster to AWS EKS with eksctl
+{https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html}
+- make sure that AWS CLI is installed (it's pre-installed on AWS AMI)
+- configure AWS CLI
+[ec2-user@~]$ aws configure
+AWS Access Key ID [****************UMFF]:
+AWS Secret Access Key [****************cjHK]:
+Default region name [us-west-2]:
+Default output format [yaml]:
+- 
 
 ============================================================================

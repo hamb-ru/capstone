@@ -42,12 +42,17 @@ hadolint:
 	hadolint --version
 #	hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile
 
-
 tidy:
 	# This is linter for HTML
 	sudo yum install tidy -y 
 	tidy --version
 #	tidy nginx/htdocs/*.html
+
+aws-eksctl:
+# AWS EKSCTL installation
+	curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+	sudo mv /tmp/eksctl /usr/local/bin
+	eksctl version
 
 k8s:
 # kubernetes - Minikube
@@ -57,15 +62,14 @@ k8s:
 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 	sudo rpm -ivh minikube-latest.x86_64.rpm --force
 ### to run minikube user (ec2-user) needs to be in group 'docker'. It was added to this group in 'env-setup' step, but we need to re-login to activate this change
-	minikube start
+	minikube start --driver=docker
 
-env: pre docker jenkins hadolint tidy
-all: pre docker jenkins hadolint tidy k8s
+env: pre docker jenkins hadolint tidy aws-eksctl
+all: pre docker jenkins hadolint tidy aws-eksctl k8s
 
 aws-cli:
 # AWS CLI installation - not needed on AWS ami
 	curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 	unzip awscliv2.zip
 	sudo ./aws/install
-
 
