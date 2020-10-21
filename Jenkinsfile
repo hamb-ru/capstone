@@ -1,7 +1,18 @@
 pipeline {
   agent any
   stages {
-	stage('Build Docker image and run it locally') {
+
+    stage('Download from S3') {
+          steps {
+            withAWS(region: 'us-west-2', credentials: 'aws-static') {
+              sh 'echo "Downloading content with AWS creds"'
+              s3Download(file: 'staging.txt', bucket: 'dmalinov-project3')
+         
+        }
+      }
+    } 
+
+	stage('Build Docker image') {
           steps {
 			sh 'echo "Now building Docker image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
@@ -33,30 +44,6 @@ pipeline {
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 				sh "docker push ${env.dockerUsername}/capstone"
 				}
-          }
-        }
-      }
-    }
-
-    stage('Staging') {
-      parallel {
-        stage('Staging1') {
-          steps {
-            sh 'echo "This is test stage1"'
-            sh '''
-                     echo "this is a kind of test stage (1)"
-                     hostname -f
-					 pwd
-                 '''
-          }
-        }
-
-        stage('Staging2') {
-          steps {
-            withAWS(region: 'us-west-2', credentials: 'aws-static') {
-              sh 'echo "Downloading content with AWS creds"'
-              s3Download(file: 'staging.txt', bucket: 'dmalinov-project3')
-            }
           }
         }
       }
