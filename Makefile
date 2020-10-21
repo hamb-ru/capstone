@@ -1,6 +1,7 @@
-## The Makefile includes environment setup, docker, Jenkins installation, linting software, k8s installation and other steps for AWS AMI (release 2018.03)
+### Dmitry Malinovsky - 
+### The Makefile includes environment setup, docker, Jenkins installation, linting software, k8s installation and other steps for AWS AMI (release 2018.03)
 
-env:
+pre:
 # Installs needed pre-requisites (git,python,etc)
 	sudo yum install git -y
 	sudo yum install python36.x86_64 -y
@@ -15,7 +16,6 @@ docker:
 	echo "you need to re-login to work with docker & k8s"
 ###  Changing(setting) password to ec2-user  
 #	echo $USER | sudo passwd $USER --stdin
-
 
 
 jenkins:
@@ -61,7 +61,8 @@ k8s:
 #	newgrp docker
 	minikube start
 
-all: env docker jenkins hadolint k8s 
+env: pre docker jenkins hadolint tidy
+all: pre docker jenkins hadolint tidy k8s
 
 aws-cli:
 # AWS CLI installation - not needed on AWS ami
