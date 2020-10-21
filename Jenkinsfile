@@ -50,13 +50,13 @@ pipeline {
 
     stage('Lint Dockerfile') {
       steps {
-        sh 'hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile'
+        sh "hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile"
       }
     }
 
     stage('Lint HTML') {
       steps {
-		sh 'tidy -q -e nginx/htdocs/*.html'
+		sh "tidy -q -e nginx/htdocs/*.html"
       }
     }
 
@@ -68,7 +68,7 @@ pipeline {
 
     stage('Deploy to minikube') {
       steps {
-        sh 'run_kubernetes.sh'
+        sh './run_kubernetes.sh'
       }
     }
 
