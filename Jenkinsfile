@@ -20,33 +20,33 @@ pipeline {
 				sh "docker rm -f capstone || true"
 				sh "docker build --tag ${env.dockerUsername}/capstone ."
 				sh "docker push ${env.dockerUsername}/capstone"
-                }
-            }
-        }
+			}
+		}
+	}
 
 	stage('Run & Push') {
-      parallel {
-        stage('Run docker container') {
-          steps {
+	  parallel {
+		stage('Run docker container') {
+		steps {
 			sh 'echo "Running builded image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 				sh "docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone"
 				sh "date >> docker_ps.output"
 				sh "docker ps >> docker_ps.output" 
 				}
-          }
-        }
+			}
+		}
 
-        stage('Push image to docker hub') {
-          steps {
+		stage('Push image to docker hub') {
+		steps {
 			sh 'echo "Push builded image to docker.hub"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 				sh "docker push ${env.dockerUsername}/capstone"
 				}
-          }
-        }
-      }
-    }
+			}
+		}
+	  }
+	}
 
     stage('Lint Dockerfile') {
       steps {
