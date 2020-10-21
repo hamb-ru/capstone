@@ -16,11 +16,11 @@ pipeline {
           steps {
 			sh 'echo "Now building Docker image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-				sh "docker login -u ${env.dockerUsername} -p ${env.dockerPassword}"
-				sh "echo 'remove docker container if exists'"
-				sh "docker rm -f capstone || true"
-				sh "docker build --tag ${env.dockerUsername}/capstone ."
-				sh "docker push ${env.dockerUsername}/capstone"
+				sh 'docker login -u ${env.dockerUsername} -p ${env.dockerPassword}'
+				sh 'echo "remove docker container if exists"'
+				sh 'docker rm -f capstone || true'
+				sh 'docker build --tag ${env.dockerUsername}/capstone .'
+				sh 'docker push ${env.dockerUsername}/capstone'
                 }
             }
         }
@@ -31,9 +31,9 @@ pipeline {
           steps {
 			sh 'echo "Running builded image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-				sh "docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone"
-				sh "date >> docker_ps.output"
-				sh "docker ps >> docker_ps.output"
+				sh 'docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone'
+				sh 'date >> docker_ps.output'
+				sh 'docker ps >> docker_ps.output'
 				}
           }
         }
@@ -42,7 +42,7 @@ pipeline {
           steps {
 			sh 'echo "Push builded image to docker.hub"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-				sh "docker push ${env.dockerUsername}/capstone"
+				sh 'docker push ${env.dockerUsername}/capstone'
 				}
           }
         }
@@ -64,6 +64,12 @@ pipeline {
     stage('Security Scan') {
       steps {
         aquaMicroscanner(imageName: 'nginx:alpine', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
+      }
+    }
+
+    stage('Deploy to minikube') {
+      steps {
+        sh 'run_kubernetes.sh'
       }
     }
 
