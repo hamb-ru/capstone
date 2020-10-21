@@ -1,7 +1,6 @@
-
-###########################################################################################
-##################################   Capstone Project   ###################################
-###########################################################################################
+############################################################################
+############################   Capstone Project   ##########################
+############################################################################
 
 # Capstone Project Overview
 
@@ -21,7 +20,6 @@ Once you have completed your Continuous Integration you will set up Continuous D
 
 - Pushing the built Docker container(s) to the Docker repository (you can use AWS ECR, create your own custom Registry within your cluster, or another 3rd party Docker repository) ; and
 - Deploying these Docker container(s) to a small Kubernetes cluster. For your Kubernetes cluster you can either use AWS Kubernetes as a Service, or build your own Kubernetes cluster. To deploy your Kubernetes cluster, use either Ansible or Cloudformation. Preferably, run these from within Jenkins as an independent pipeline.
-
 
 # Project Directions
 
@@ -58,7 +56,7 @@ Make sure you have taken all the screenshots you need, as directed above, and cr
 Zip up these screenshots and text file into a single doc, and this will constitute your project submission.
 Before you submit your project, please make sure you have checked all of your work against the project rubric. If you find that you have not satisfied any area of the rubric, please revise your work before you submit it. This rubric is what your reviewer will be using to assess your work.
 
-===========================================================================================
+============================================================================
 
 # Project implementation
 
