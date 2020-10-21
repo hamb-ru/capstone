@@ -2,18 +2,17 @@ pipeline {
   agent any
   stages {
 
-    stage('Download from S3') {
-          steps {
-            withAWS(region: 'us-west-2', credentials: 'aws-static') {
-              sh 'echo "Downloading content with AWS creds"'
-              s3Download(file: 'staging.txt', bucket: 'dmalinov-project3')
-         
-        }
-      }
-    } 
+	stage('Download from S3') {
+		steps {
+			withAWS(region: 'us-west-2', credentials: 'aws-static') {
+			  sh 'echo "Downloading content with AWS creds"'
+			  s3Download(file: 'staging.txt', bucket: 'dmalinov-project3')
+			}
+		}
+	}
 
 	stage('Build Docker image') {
-          steps {
+		steps {
 			sh 'echo "Now building Docker image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 				sh "docker login -u ${env.dockerUsername} -p ${env.dockerPassword}"
@@ -31,9 +30,9 @@ pipeline {
           steps {
 			sh 'echo "Running builded image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-				sh 'docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone'
-				sh 'date >> docker_ps.output'
-				sh 'docker ps >> docker_ps.output'
+				sh "docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone"
+				sh "date >> docker_ps.output"
+				sh "docker ps >> docker_ps.output" 
 				}
           }
         }
@@ -42,7 +41,7 @@ pipeline {
           steps {
 			sh 'echo "Push builded image to docker.hub"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-				sh 'docker push ${env.dockerUsername}/capstone'
+				sh "docker push ${env.dockerUsername}/capstone"
 				}
           }
         }
