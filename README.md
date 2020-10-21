@@ -80,7 +80,7 @@ It will have following steps:
 - Lint Dockerfile with hadolint
 - Lint HTML with tidy
 - Security Scan image with AquaMicroscanner
-- Upload artefacts to AWS (info about running docker containers)
+- Upload artefacts to AWS (info about running docker containers and image testing output)
 
 ## CD Pipeline
 - Deploy kubernetes cluster to local minikube

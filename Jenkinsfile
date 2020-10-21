@@ -62,7 +62,7 @@ pipeline {
 
 	stage('Security Scan') {
 		steps {
-			aquaMicroscanner(imageName: 'nginx:alpine', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
+			aquaMicroscanner(imageName: 'hamb/capstone', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
 		}
 	}
 
