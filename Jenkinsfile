@@ -16,11 +16,11 @@ pipeline {
           steps {
 			sh 'echo "Now building Docker image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-				sh 'docker login -u ${env.dockerUsername} -p ${env.dockerPassword}'
-				sh 'echo "remove docker container if exists"'
-				sh 'docker rm -f capstone || true'
-				sh 'docker build --tag ${env.dockerUsername}/capstone .'
-				sh 'docker push ${env.dockerUsername}/capstone'
+				sh "docker login -u ${env.dockerUsername} -p ${env.dockerPassword}"
+				sh "echo 'remove docker container if exists'"
+				sh "docker rm -f capstone || true"
+				sh "docker build --tag ${env.dockerUsername}/capstone ."
+				sh "docker push ${env.dockerUsername}/capstone"
                 }
             }
         }
