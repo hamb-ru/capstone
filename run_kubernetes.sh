@@ -6,7 +6,7 @@ dockerpath="hamb/capstone"
 
 # Step 2
 # Run the Docker Hub container with kubernetes
-#kubectl run --image=$dockerpath capstone --port=80
+#x
 kubectl create deployment capstone --image=$dockerpath
 
 # Step 3:
@@ -14,5 +14,5 @@ kubectl create deployment capstone --image=$dockerpath
 kubectl get pods --all-namespaces
 
 # Step 4:
-# Forward the container port to a host
-kubectl port-forward deployment/capstone 8888:8888
+# Forward the container port 8888 to a host port 7777 (8888 host port could be occupied by running docker container)
+kubectl port-forward deployment/capstone 7777:8888

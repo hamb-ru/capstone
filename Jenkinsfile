@@ -68,6 +68,7 @@ pipeline {
 
 		stage('Deploy to minikube') {
 			steps {
+				sh 'echo "If needed builded image could be deployed to k8s as well for testing purposes. To do it - uncomment next line (remove 'echo')"'
 				sh 'echo "./run_kubernetes.sh"'
 			}
 		}
