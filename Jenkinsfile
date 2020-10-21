@@ -68,7 +68,7 @@ pipeline {
 
     stage('Deploy to minikube') {
       steps {
-        sh './run_kubernetes.sh'
+        sh "./run_kubernetes.sh"
       }
     }
 
