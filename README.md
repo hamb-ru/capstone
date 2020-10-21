@@ -69,3 +69,18 @@ As far initial AMI Linux does not have git installed initially we need either to
 ### Jenkins
 Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Aqua MicroScanner, Blue Ocean) and credentials for AWS and DOCKER hub access
 
+### CI Pipeline
+Create CI pipeline from Jenkinsfile. 
+It will have following steps: 
+- Download content from S3 (if needed)
+- Build Docker image with nginx dummy web site
+- Run docker container from builded image
+- Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
+- Lint Dockerfile with hadolint
+- Lint HTML with tidy
+- Security Scan image with AquaMicroscanner
+- Upload artefacts to AWS (info about running docker containers)
+
+### CD Pipeline
+Deploy kubernetes cluster to local minikube - ?
+Deploy kubernetes cluster to AWS EKS
