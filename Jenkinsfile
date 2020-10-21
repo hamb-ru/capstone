@@ -77,8 +77,10 @@ pipeline {
       steps {
         withAWS(region: 'us-west-2', credentials: 'aws-static') {
           sh 'echo "Uploading content with AWS creds"'
-          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'index.html', bucket: 'dmalinov-capstone')
-          s3Upload(file: 'docker_ps.output', bucket: 'dmalinov-capstone')
+          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'docker_ps.output', bucket: 'dmalinov-capstone')
+		  s3Upload(file: 'scanout.html', bucket: 'dmalinov-capstone')
+		  s3Upload(file: 'scanlatest.html', bucket: 'dmalinov-capstone')
+          s3Upload(file: 'styles.css', bucket: 'dmalinov-capstone')
         }
 
       }

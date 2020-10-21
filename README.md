@@ -83,8 +83,9 @@ It will have following steps:
 - Upload artefacts to AWS (info about running docker containers)
 
 ## CD Pipeline
-Deploy kubernetes cluster to local minikube - ?
-Deploy kubernetes cluster to AWS EKS - ?
+- Deploy kubernetes cluster to local minikube
+or
+- Deploy kubernetes cluster to AWS EKS
 
 
-===========================================================================================
+============================================================================
