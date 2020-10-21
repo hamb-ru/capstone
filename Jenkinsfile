@@ -48,42 +48,41 @@ pipeline {
 	  }
 	}
 
-    stage('Lint Dockerfile') {
-      steps {
-        sh "hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile"
-      }
-    }
+	stage('Lint Dockerfile') {
+		steps {
+			sh "hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile"
+		}
+	}
 
-    stage('Lint HTML') {
-      steps {
-		sh "tidy -q -e nginx/htdocs/*.html"
-      }
-    }
+	stage('Lint HTML') {
+		steps {
+			sh "tidy -q -e nginx/htdocs/*.html"
+		}
+	}
 
-    stage('Security Scan') {
-      steps {
-        aquaMicroscanner(imageName: 'nginx:alpine', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
-      }
-    }
+	stage('Security Scan') {
+		steps {
+			aquaMicroscanner(imageName: 'nginx:alpine', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
+		}
+	}
 
-    stage('Deploy to minikube') {
-      steps {
-        sh "./run_kubernetes.sh"
-      }
-    }
+	stage('Deploy to minikube') {
+		steps {
+			sh 'echo "./run_kubernetes.sh"'
+		}
+	}
 
-    stage('Upload to AWS') {
-      steps {
-        withAWS(region: 'us-west-2', credentials: 'aws-static') {
-          sh 'echo "Uploading content with AWS creds"'
-          s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'docker_ps.output', bucket: 'dmalinov-capstone')
-		  s3Upload(file: 'scanout.html', bucket: 'dmalinov-capstone')
-		  s3Upload(file: 'scanlatest.html', bucket: 'dmalinov-capstone')
-          s3Upload(file: 'styles.css', bucket: 'dmalinov-capstone')
-        }
-
-      }
-    }
+	stage('Upload to AWS') {
+		steps {
+		withAWS(region: 'us-west-2', credentials: 'aws-static') {
+			sh 'echo "Uploading content with AWS creds"'
+			s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'docker_ps.output', bucket: 'dmalinov-capstone')
+			s3Upload(file: 'scanout.html', bucket: 'dmalinov-capstone')
+			s3Upload(file: 'scanlatest.html', bucket: 'dmalinov-capstone')
+			s3Upload(file: 'styles.css', bucket: 'dmalinov-capstone')
+			}
+		}
+	}
 
   }
 }
