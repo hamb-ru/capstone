@@ -32,7 +32,7 @@ pipeline {
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 				sh "docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone"
 				sh "date >> docker_ps.output"
-				sh "docker ps >> docker_ps.output" 
+				sh "docker ps >> docker_ps_output.txt" 
 				}
 			}
 		}
@@ -76,7 +76,7 @@ pipeline {
 		steps {
 		withAWS(region: 'us-west-2', credentials: 'aws-static') {
 			sh 'echo "Uploading content with AWS creds"'
-			s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'docker_ps.output', bucket: 'dmalinov-capstone')
+			s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file: 'docker_ps_output.txt', bucket: 'dmalinov-capstone')
 			s3Upload(file: 'scanout.html', bucket: 'dmalinov-capstone')
 			s3Upload(file: 'scanlatest.html', bucket: 'dmalinov-capstone')
 			s3Upload(file: 'styles.css', bucket: 'dmalinov-capstone')
