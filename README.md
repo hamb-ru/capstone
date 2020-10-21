@@ -79,8 +79,8 @@ It will have following steps:
 - Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
 - Lint Dockerfile with hadolint
 - Lint HTML with tidy
-- Security Scan image with AquaMicroscanner
-- Upload artefacts to AWS (info about running docker containers and image testing output)
+- Security Scan of builded image with AquaMicroscanner
+- Upload artefacts to AWS (info about running docker container and image testing output - https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html)
 
 ## CD Pipeline
 - Deploy kubernetes cluster to local minikube

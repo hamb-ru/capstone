@@ -31,7 +31,7 @@ pipeline {
 			sh 'echo "Running builded image"'
 			withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 				sh "docker run -d -p 8888:8888 --name capstone ${env.dockerUsername}/capstone"
-				sh "date >> docker_ps.output"
+				sh "date >> docker_ps_output.txt"
 				sh "docker ps >> docker_ps_output.txt" 
 				}
 			}
