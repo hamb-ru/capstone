@@ -13,7 +13,7 @@ dockerpath="hamb/capstone_green"
 kubectl create deployment capstone-green --image=$dockerpath
 
 # Step 4:
-# Wait 10 seconds till the pod come up
+# Wait 30 seconds till the pod come up
 sleep 30
 
 # Step 5:
