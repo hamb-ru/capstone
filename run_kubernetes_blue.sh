@@ -13,8 +13,8 @@ dockerpath="hamb/capstone_blue"
 kubectl create deployment capstone-blue --image=$dockerpath
 
 # Step 4:
-# Wait 10 seconds till the pod come up
-sleep 10
+# Wait 30 seconds till the pod come up
+sleep 30
 
 # Step 5:
 # List kubernetes pods
@@ -22,4 +22,4 @@ kubectl get pods --all-namespaces
 
 # Step 6:
 # Forward the container port 8888 to a host port 8877 (blue deployment)
-nohup kubectl port-forward --address 0.0.0.0 deployment/capstone-blue 8877:8888 &
+kubectl port-forward --address 0.0.0.0 deployment/capstone-blue 8877:8888 &

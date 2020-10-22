@@ -14,7 +14,7 @@ kubectl create deployment capstone-green --image=$dockerpath
 
 # Step 4:
 # Wait 10 seconds till the pod come up
-sleep 10
+sleep 30
 
 # Step 5:
 # List kubernetes pods
