@@ -82,6 +82,11 @@ It will have following steps:
 - Security Scan of builded image with AquaMicroscanner
 - Upload artefacts to AWS (info about running docker container and image testing output - https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html)
 
+![pipeline screen1](screenshots/pipeline1.png)
+![pipeline screen2](screenshots/pipeline2.png?raw=true)
+
+Click "cancel" here.
+
 ## CD Pipeline
 - Deploy kubernetes cluster to local minikube
 or
