@@ -21,5 +21,5 @@ sleep 10
 kubectl get pods --all-namespaces
 
 # Step 6:
-# Forward the container port 8888 to a host port 8877 (green deployment)
+# Forward the container port 8888 to a host port 8877 (blue deployment)
 nohup kubectl port-forward --address 0.0.0.0 deployment/capstone-blue 8877:8888 &
