@@ -1,0 +1,10 @@
+### All project code is stored in a GitHub repository and a link to the repository for reviewers is below - 
+https://github.com/hamb-ru/capstone
+
+### Docker repo - 
+https://hub.docker.com/repository/docker/hamb/capstone/
+
+AWS S3 bucket files with output - 
+https://dmalinov-capstone.s3.us-west-2.amazonaws.com/docker_ps_output.txt
+https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html
+
