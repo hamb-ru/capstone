@@ -2,6 +2,18 @@ pipeline {
 	agent any
 	stages {
 
+		stage('Lint Dockerfile') {
+			steps {
+				sh "hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile"
+			}
+		}
+
+		stage('Lint HTML') {
+			steps {
+				sh "tidy -q -e nginx/htdocs/*.html"
+			}
+		}
+
 		stage('Build Docker image') {
 			steps {
 				sh 'echo "Now building Docker image"'
@@ -36,18 +48,6 @@ pipeline {
 				}
 			}
 		  }
-		}
-
-		stage('Lint Dockerfile') {
-			steps {
-				sh "hadolint --ignore DL3013 --ignore DL3018 --ignore DL3019 Dockerfile"
-			}
-		}
-
-		stage('Lint HTML') {
-			steps {
-				sh "tidy -q -e nginx/htdocs/*.html"
-			}
 		}
 
 		stage('Security Scan') {
