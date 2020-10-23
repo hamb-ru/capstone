@@ -75,11 +75,11 @@ Create CI pipeline from Jenkinsfile.
 ![pipeline screen1](screenshots/screenshot01_successful_pipeline.jpg)
 It will have the following steps: 
 - Lint Dockerfile with hadolint [failed Linting screenshot below]
-![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg?raw=true)
+![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg)
 - Lint HTML with tidy [failed Linting screenshot below]
-![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg?raw=true)
+![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg)
 - Build Docker image with nginx dummy web site
-![pipeline screen4](screenshots/screenshot04_successful_build.jpg?raw=true)
+![pipeline screen4](screenshots/screenshot04_successful_build.jpg)
 - Run docker container from builded image
 - Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
 - Security Scan of builded image with AquaMicroscanner
@@ -90,7 +90,7 @@ It will have the following steps:
 ## CD Pipeline
 There could be two options/ways - 
 1) Deploy kubernetes cluster to local minikube. Green/Blue deployment is implemented by different run_kubernetes_(green/blue).sh scripts with different forwarded ports.
-![pipeline screen4](screenshots/screenshot05_minikube_deploy.jpg?raw=true)
+![pipeline screen4](screenshots/screenshot05_minikube_deploy.jpg)
 - minikube-deployment pipeline is triggered after successfull finish of CI pipeline with running the following commands:
 	- minikube start 
 	- 
