@@ -5,7 +5,7 @@
 dockerpath="hamb/capstone"
 
 # Step 2
-# Run the Docker Hub container with kubernetes via deployment
+# Run the Docker container with kubernetes via deployment
 kubectl create deployment capstone --image=$dockerpath
 
 # Step 3:
