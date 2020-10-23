@@ -1,5 +1,5 @@
 ############################################################################
-###############################   Capstone Project   #############################
+################################   Capstone Project   ##############################
 ############################################################################
 
 # Capstone Project Overview
@@ -86,12 +86,16 @@ It will have the following steps:
 - Upload artefacts to AWS S3 bucket (info about running docker container and image testing output)
 
 ## CD Pipeline
-There could be two options/ways - 
-1) Deploy kubernetes cluster to local minikube. Green/Blue deployment is implemented by different run_kubernetes_(green/blue).sh scripts with different forwarded ports.
-![pipeline screen4](screenshots/screenshot05_minikube_deploy.jpg)
-- minikube-deployment pipeline is triggered after successfull finish of CI pipeline with running the following commands:
-	- minikube start 
-	- 
+There could be two ways: 
+1) Deploy kubernetes cluster to local minikube. 
+Green/Blue deployment is implemented by running two different run_kubernetes_(green/blue).sh scripts with different forwarded ports:
+	- minikube start
+	- run_kubernetes_green.sh
+	- run_kubernetes_blue.sh
+![pipeline screen5](screenshots/screenshot05_minikube_deployment.jpg)
+- minikube-deployment pipeline could be triggered after successfull finish of CI pipeline or run manually:
+![pipeline screen6](screenshots/screenshot06_green-blue.jpg)
+
 or
 - Deploy kubernetes cluster to AWS EKS with eksctl
 {https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html}
