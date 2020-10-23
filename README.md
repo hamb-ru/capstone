@@ -74,9 +74,9 @@ Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Amazon EC2 plugi
 Create CI pipeline from Jenkinsfile. 
 ![pipeline screen1](screenshots/screenshot01_successful_pipeline.jpg)
 It will have the following steps: 
-- Lint Dockerfile with hadolint
+- Lint Dockerfile with hadolint [failed Linting screenshot below]
 ![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg?raw=true)
-- Lint HTML with tidy
+- Lint HTML with tidy [failed Linting screenshot below]
 ![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg?raw=true)
 - Build Docker image with nginx dummy web site
 ![pipeline screen4](screenshots/screenshot04_successful_build.jpg?raw=true)
