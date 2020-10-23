@@ -2,15 +2,6 @@ pipeline {
 	agent any
 	stages {
 
-		stage('Download from S3') {
-			steps {
-				withAWS(region: 'us-west-2', credentials: 'aws-static') {
-				  sh 'echo "Downloading content with AWS creds"'
-				  s3Download(file: 'staging.txt', bucket: 'dmalinov-project3')
-				}
-			}
-		}
-
 		stage('Build Docker image') {
 			steps {
 				sh 'echo "Now building Docker image"'
@@ -19,7 +10,6 @@ pipeline {
 					sh "echo 'remove docker container if exists'"
 					sh "docker rm -f capstone || true"
 					sh "docker build --tag ${env.dockerUsername}/capstone ."
-					sh "docker push ${env.dockerUsername}/capstone"
 				}
 			}
 		}
@@ -66,14 +56,14 @@ pipeline {
 			}
 		}
 
-		stage('Deploy to minikube') {
+		stage('OFF - Deploy to minikube - OFF') {
 			steps {
 				sh 'echo "If needed builded image could be deployed to k8s as well for testing purposes. To do it - uncomment next line (remove echo)"'
 				sh 'echo "./run_kubernetes.sh"'
 			}
 		}
 
-		stage('Upload to AWS') {
+		stage('Upload to S3 bucket') {
 			steps {
 			withAWS(region: 'us-west-2', credentials: 'aws-static') {
 				sh 'echo "Uploading content with AWS creds"'

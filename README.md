@@ -1,5 +1,5 @@
 ############################################################################
-############################   Capstone Project   ##########################
+###############################   Capstone Project   #############################
 ############################################################################
 
 # Capstone Project Overview
@@ -88,7 +88,11 @@ It will have following steps:
 Click "cancel" here.
 
 ## CD Pipeline
-- Deploy kubernetes cluster to local minikube
+There could be two options/ways - 
+1) Deploy kubernetes cluster to local minikube. Green/Blue deployment could be implemented by different run_kubernetes_(green/blue).sh scripts with different forwarded ports.
+- minikube-deployment pipeline is triggered after successfull finish of CI pipeline with running the following commands:
+	- minikube start 
+	- 
 or
 - Deploy kubernetes cluster to AWS EKS with eksctl
 {https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html}
@@ -100,5 +104,8 @@ AWS Secret Access Key [****************cjHK]:
 Default region name [us-west-2]:
 Default output format [yaml]:
 - 
-
 ============================================================================
+
+docker build /home/ec2-user/git/capstone -t hamb/capstone_green
+
+docker build --tag hamb/capstone_blue /home/ec2-user/git/capstone
