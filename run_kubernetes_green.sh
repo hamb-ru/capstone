@@ -19,7 +19,7 @@ sleep 30
 # Step 5:
 # List kubernetes pods
 kubectl get pods --all-namespaces
-sleep 10
+sleep 5
 
 # Step 6:
 # Forward the container port 8888 to a host port 8899 (green deployment)
