@@ -72,24 +72,25 @@ Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Amazon EC2 plugi
 
 ## CI Pipeline
 Create CI pipeline from Jenkinsfile. 
-It will have following steps: 
-- Download content from S3 (if needed)
+![pipeline screen1](screenshots/screenshot01_successful_pipeline.jpg)
+It will have the following steps: 
+- Lint Dockerfile with hadolint
+![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg?raw=true)
+- Lint HTML with tidy
+![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg?raw=true)
 - Build Docker image with nginx dummy web site
+![pipeline screen4](screenshots/screenshot04_successful_build.jpg?raw=true)
 - Run docker container from builded image
 - Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
-- Lint Dockerfile with hadolint
-- Lint HTML with tidy
 - Security Scan of builded image with AquaMicroscanner
-- Upload artefacts to AWS (info about running docker container and image testing output - https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html)
-
-![pipeline screen1](screenshots/pipeline1.png)
-![pipeline screen2](screenshots/pipeline2.png?raw=true)
-
-Click "cancel" here.
+- Upload artefacts to AWS (info about running docker container and image testing output)
+	- https://dmalinov-capstone.s3.us-west-2.amazonaws.com/docker_ps_output.txt
+	- https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html
 
 ## CD Pipeline
 There could be two options/ways - 
-1) Deploy kubernetes cluster to local minikube. Green/Blue deployment could be implemented by different run_kubernetes_(green/blue).sh scripts with different forwarded ports.
+1) Deploy kubernetes cluster to local minikube. Green/Blue deployment is implemented by different run_kubernetes_(green/blue).sh scripts with different forwarded ports.
+![pipeline screen4](screenshots/screenshot05_minikube_deploy.jpg?raw=true)
 - minikube-deployment pipeline is triggered after successfull finish of CI pipeline with running the following commands:
 	- minikube start 
 	- 
