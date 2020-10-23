@@ -1,7 +1,5 @@
 FROM nginx:alpine
 
-<wrong syntax in Dockerfile>
-
 ## Step 1:
 # Copy nginx config
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
