@@ -62,7 +62,7 @@ k8s:
 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
 	sudo rpm -ivh minikube-latest.x86_64.rpm --force
 ### to run minikube user (ec2-user) needs to be in group 'docker'. It was added to this group in 'env-setup' step, but we need to re-login to activate this change
-	minikube start --driver=docker
+#	minikube start --driver=docker
 
 env: pre docker jenkins hadolint tidy aws-eksctl
 all: pre docker jenkins hadolint tidy aws-eksctl k8s

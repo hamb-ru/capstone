@@ -80,12 +80,10 @@ It will have the following steps:
 ![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg)
 - Build Docker image with nginx dummy web site
 ![pipeline screen4](screenshots/screenshot04_successful_build.jpg)
-- Run docker container from builded image
+- Run docker container from builded image (https://dmalinov-capstone.s3.us-west-2.amazonaws.com/docker_ps_output.txt)
 - Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
-- Security Scan of builded image with AquaMicroscanner
-- Upload artefacts to AWS (info about running docker container and image testing output)
-	- https://dmalinov-capstone.s3.us-west-2.amazonaws.com/docker_ps_output.txt
-	- https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html
+- Security Scan of builded image with AquaMicroscanner (https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html)
+- Upload artefacts to AWS S3 bucket (info about running docker container and image testing output)
 
 ## CD Pipeline
 There could be two options/ways - 
