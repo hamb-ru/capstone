@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Green Deployment') {
+            steps {
+                echo 'Deploying Green app with LoadBalancer to EKS cluster'
+                withAWS(credentials: 'aws-static', region: 'us-west-2') {
+                    sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
+                    sh "kubectl create -f ./app-deploy-green.yaml --record"
+                    sh "kubectl apply -f ./svc-green.yml"
+                    sh "kkubectl rollout status deployment/eks-deployment"
+                    sh "kubectl get deployments"
+                    sh "kubectl describe deployments"
+                    sh "kubectl get rs"
+                    sh "kubectl get pods --show-labels"                    
+                    sh "kubectl get -o wide svc nginx-lb-green"
+                    sh "kubectl describe svc nginx-lb-green"
+                }
+            }
+        }
+    }
+} 

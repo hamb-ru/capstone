@@ -102,8 +102,8 @@ or
 - make sure that AWS CLI is installed (it's pre-installed on AWS AMI) and eksctl installed ('make aws-eksctl' if not yet)
 - configure AWS CLI
 	[ec2-user@~]$ aws configure <br>
-		AWS Access Key ID [****************UMFF]:  <br>
-		AWS Secret Access Key [****************cjHK]: <br>
+		AWS Access Key ID [****************UMFF]:  <br> AKIA4RNL6OMCJVBRUMFF
+		AWS Secret Access Key [****************cjHK]: <br> 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
 		Default region name [us-west-2]: <br>
 		Default output format [yaml]: <br>
 - Appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc [i did it manually via AWS IAM]
@@ -116,6 +116,14 @@ or
  so we will see 3 new ec2 instances running
 ![pipeline screen10](screenshots/screenshot10_eks_cluster_03.jpg)
 
+After we have deployed EKS cluster we can deploy our nginx dummy app to the k8s cluster and check how Rolling Update is working.
+We will perform this by running two jenkins jobs consistently:
+![pipeline screen11](screenshots/screenshot11_eks_app_deploy_01.jpg)
+or it could be done manually by running scripts - app-deploy-green.yaml & app-deploy-blue.yaml
 
 ============================================================================
+aws --region <region-code> eks update-kubeconfig --name <cluster_name> --role-arn arn:aws:iam::<aws_account_id>:role/<role_name>
+aws --region us-west-2 eks update-kubeconfig --name eksctl-capstone-cluster --role-arn arn:aws:iam::862038422276:user/jenkins
+
+[ec2-user@ip-172-31-5-150 ~]$ aws eks update-kubeconfig --name capstone --verbose
 
