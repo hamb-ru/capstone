@@ -12,7 +12,7 @@ pipeline {
                     sh "kubectl get deployments"
                     sh "kubectl describe deployments"
                     sh "kubectl get rs"
-                    sh "kubectl get pods --show-labels"                    
+                    sh "kubectl get pods --show-labels"
                     sh "kubectl get services"
                     sh "kubectl describe svc nginx-lb-green"
                 }
