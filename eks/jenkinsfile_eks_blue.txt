@@ -7,8 +7,8 @@ pipeline {
                 withAWS(credentials: 'aws-static', region: 'us-west-2') {
                     sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
                     sh "kubectl create -f ./app-deploy-blue.yaml --record"
-                    sh "kubectl apply -f ./svc-blue.yml"
-                    sh "kkubectl rollout status deployment/eks-deployment"
+                    sh "kubectl apply -f ./svc-blue.yaml"
+                    sh "kubectl rollout status deployment/eks-deployment-blue"
                     sh "kubectl get deployments"
                     sh "kubectl describe deployments"
                     sh "kubectl get rs"
