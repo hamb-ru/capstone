@@ -2,7 +2,7 @@
 ################################   Capstone Project   ##############################
 ############################################################################
 
-# Capstone Project Overview
+						# Capstone Project Overview
 
 In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:
 
@@ -58,14 +58,14 @@ Before you submit your project, please make sure you have checked all of your wo
 
 ============================================================================
 
-# Project implementation
+						# Project implementation
 
 ## Initial setup
 To start deploying/exploring the project we need any linux machine to run Jenkins and other attendant software (I've used EC2 t2.large instance in AWS).
-As far initial AMI Linux does not have git installed initially we need either to install it manually (sudo yum install git) and clone this repo or just copy the Makefile.
+As far AMI Linux image does not have git installed initially we need either to install it manually (sudo yum install git) and clone this repo or just copy the Makefile to the machine.
 
-- Run 'make env' to install git, python, docker, jenkins, hadolint, tidy and dependencies.
-- Re-login or run another shell, to activate user's group 'docker' (it will be needed to run minikube) 
+- Run 'make env' to install git, python, docker, jenkins, hadolint, tidy, aws-eksctland dependencies.
+- Re-login or run another shell, to activate user's group 'docker' if minikube will be run locally for debugging. 
 
 ## Jenkins
 Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Amazon EC2 plugin, Aqua MicroScanner, Blue Ocean) and credentials for AWS and DOCKER hub access
@@ -78,7 +78,7 @@ It will have the following steps:
 ![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg)
 - Lint HTML with tidy [failed Linting screenshot below]
 ![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg)
-- Build Docker image with nginx dummy web site
+- Build Docker image with dummy web site running on nginx
 ![pipeline screen4](screenshots/screenshot04_successful_build.jpg)
 - Run docker container from builded image (https://dmalinov-capstone.s3.us-west-2.amazonaws.com/docker_ps_output.txt)
 - Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
@@ -93,7 +93,7 @@ Green/Blue deployment is implemented by running two different run_kubernetes_(gr
 	- run_kubernetes_green.sh
 	- run_kubernetes_blue.sh
 ![pipeline screen5](screenshots/screenshot05_minikube_deployment.jpg)
-- minikube-deployment pipeline could be triggered after successfull finish of CI pipeline or run manually:
+- minikube-deployment pipeline could be triggered after successfull finish of CI pipeline or run manually.
 ![pipeline screen6](screenshots/screenshot06_green-blue.jpg)
 
 or
@@ -101,14 +101,12 @@ or
 {https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html}
 - make sure that AWS CLI is installed (it's pre-installed on AWS AMI)
 - configure AWS CLI
-[ec2-user@~]$ aws configure
-AWS Access Key ID [****************UMFF]:
-AWS Secret Access Key [****************cjHK]:
-Default region name [us-west-2]:
-Default output format [yaml]:
+[ec2-user@~]$ aws configure <br>
+AWS Access Key ID [****************UMFF]:  <br>
+AWS Secret Access Key [****************cjHK]: <br>
+Default region name [us-west-2]: <br>
+Default output format [yaml]: <br>
 - 
+Appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc
 ============================================================================
 
-docker build /home/ec2-user/git/capstone -t hamb/capstone_green
-
-docker build --tag hamb/capstone_blue /home/ec2-user/git/capstone
