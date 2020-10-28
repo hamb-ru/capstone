@@ -119,11 +119,7 @@ or
 After we have deployed EKS cluster we can deploy our nginx dummy app to the k8s cluster and check how Rolling Update is working.
 We will perform this by running two jenkins jobs consistently:
 ![pipeline screen11](screenshots/screenshot11_eks_app_deploy_01.jpg)
-or it could be done manually by running scripts - app-deploy-green.yaml & app-deploy-blue.yaml
+or it could be done manually by applying yaml files with app deployment and LoadBalancer service - app-deploy-<COLOR>.yaml & svc-<COLOR>.yaml
 
 ============================================================================
-aws --region <region-code> eks update-kubeconfig --name <cluster_name> --role-arn arn:aws:iam::<aws_account_id>:role/<role_name>
-aws --region us-west-2 eks update-kubeconfig --name eksctl-capstone-cluster --role-arn arn:aws:iam::862038422276:user/jenkins
-
-[ec2-user@ip-172-31-5-150 ~]$ aws eks update-kubeconfig --name capstone --verbose
 
