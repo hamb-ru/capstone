@@ -124,5 +124,11 @@ And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen12](screenshots/screenshot12_eks_green-blue_02.jpg)
 
 - Now it's time to check Rolling Update by running pipeline EKS-rolling-deployment (jenkinsfile - 'eks/jenkinsfile_eks_rolling.txt') <br>
+- Initial deployment will be done from Green deployment image:
+![pipeline screen13](screenshots/screenshot13_eks_rolling_01.jpg)
+- Than we are changing our nginx app (update container image from hamb/capstone_green to hamb/capstone) and re-run pipeline:
+![pipeline screen15](screenshots/screenshot14_eks_rolling_03.jpg)
+- we can see that LoadBalancer URL shows us updated web app:
+![pipeline screen14](screenshots/screenshot14_eks_rolling_02.jpg)
 ============================================================================
 
