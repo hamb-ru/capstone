@@ -102,24 +102,27 @@ or
 - make sure that AWS CLI is installed (it's pre-installed on AWS AMI) and eksctl installed ('make aws-eksctl' if not yet)
 - configure AWS CLI
 	[ec2-user@~]$ aws configure <br>
-		AWS Access Key ID [****************UMFF]:  <br> AKIA4RNL6OMCJVBRUMFF
-		AWS Secret Access Key [****************cjHK]: <br> 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
+		AWS Access Key ID [****************UMFF]:  <br> 
+		AWS Secret Access Key [****************cjHK]: <br> 
 		Default region name [us-west-2]: <br>
 		Default output format [yaml]: <br>
 - Appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc [i did it manually via AWS IAM]
 - run eks_cluster_ceate.sh script:
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
- it will deploy to EKS cluster "eksctl-capstone-cluster"
+ it will deploy to EKS new cluster "eksctl-capstone-cluster"
 ![pipeline screen8](screenshots/screenshot08_eks_cluster_01.jpg) 
  and nodegroup "eksctl-capstone-nodegroup-linux-nodes" according to settings in the script 
 ![pipeline screen9](screenshots/screenshot09_eks_cluster_02.jpg) 
  so we will see 3 new ec2 instances running
 ![pipeline screen10](screenshots/screenshot10_eks_cluster_03.jpg)
 
-After we have deployed EKS cluster we can deploy our nginx dummy app to the k8s cluster and check how Rolling Update is working.
-We will perform this by running two jenkins jobs consistently:
-![pipeline screen11](screenshots/screenshot11_eks_app_deploy_01.jpg)
-or it could be done manually by applying yaml files with app deployment and LoadBalancer service - app-deploy-<COLOR>.yaml & svc-<COLOR>.yaml
+After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update is working.
+
+We will perform Green-Blue deployment by running pipeline EKS-deployment-GB (jenkinsfile - eks/jenkinsfile_eks_gb.txt)
+[also it could be done by two separate Jenkins jobs - jenkinsfile_eks_green.txt & jenkinsfile_eks_blue.txt]
+![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
+or it could be even done by manually applying yaml files with app deployment and LoadBalancer service - app-deploy-<COLOR>.yaml & svc-<COLOR>.yaml from 'eks' folder.
+
 
 ============================================================================
 

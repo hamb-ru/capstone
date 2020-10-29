@@ -1,0 +1,60 @@
+pipeline {
+	agent any
+	stages {
+		
+		stage('Pre-Deployment set up') {
+			steps {
+				echo 'Setting up environment for app deployment'
+				withAWS(credentials: 'aws-static', region: 'us-west-2') {
+					sh "rm -rf ./capstone"
+					sh "git clone https://github.com/hamb-ru/capstone"
+					sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
+				}
+			}
+		}
+		
+		stage('Green-Blue Deployment') {
+		  parallel {
+			stage('Green') {
+				steps {
+					echo 'Deploying Green app with LoadBalancer to EKS cluster'
+					withAWS(credentials: 'aws-static', region: 'us-west-2') {
+						sh "kubectl apply -f ./capstone/eks/app-deploy-green.yaml --record"
+						sh "kubectl apply -f ./capstone/eks/svc-green.yaml"
+						sh "kubectl rollout status deployment/eks-deployment-green"
+						sh "kubectl get deployments"
+						sh "kubectl describe deployments"
+					}
+				}
+			}
+
+			stage('Blue') {
+				steps {
+					echo 'Deploying Blue app with LoadBalancer to EKS cluster'
+					withAWS(credentials: 'aws-static', region: 'us-west-2') {
+						sh "kubectl apply -f ./capstone/eks/app-deploy-blue.yaml --record"
+						sh "kubectl apply -f ./capstone/eks/svc-blue.yaml"
+						sh "kubectl rollout status deployment/eks-deployment-blue"
+						sh "kubectl get deployments"
+						sh "kubectl describe deployments"
+					}
+				}
+			}
+		  }
+		}
+		
+		stage('Post-Deployment Output') {
+			steps {
+				echo 'Getting output (Loadbalancer information )'
+				withAWS(credentials: 'aws-static', region: 'us-west-2') {
+					sh "kubectl get rs"
+					sh "kubectl get pods --show-labels"
+					sh "kubectl get services"
+					sh "kubectl describe svc nginx-lb-green"
+					sh "kubectl describe svc nginx-lb-blue"
+				}
+			}
+		}
+	}
+}
+ 
