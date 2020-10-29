@@ -125,7 +125,10 @@ LoadBalancer Ingress:     a0252a5518b424485901b8f760e39a07-2139813722.us-west-2.
 ![pipeline screen20](screenshots/screenshot20_green_lb_url.jpg)
 ![pipeline screen21](screenshots/screenshot21_blue_lb_url.jpg)
 
-
+## So our CI/CD pipeline is ready!
+ CI pipeline lints the code, build the image, push the image and then run the CD pipeline to deploy the image to the aws cluster. 
+ Every time we have commit to the git repository, the continuous integration / continuous deployment pipeline is going to run automatically and that it's going to save time!
+ 
 
 ===========================================================================
 
