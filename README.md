@@ -116,13 +116,14 @@ Create CI pipeline from Jenkinsfile in projects root folder.
 - After successfull finish of CI pipeline one of Green/Blue CD pipelines ('eks-deployment-(green/blue)') triggers accordingly:
 ![pipeline screen18](screenshots/screenshot18_cd_pipeline_hooked.jpg)
 
-- This CD pipeline will deploy builded app container to EKS kubernetes cluster. In the post-deployment output stage LoadBalancer's URLs could be found:
+- This CD pipeline will deploy builded app container to EKS kubernetes cluster. 
+- In the post-deployment output stage LoadBalancer's URLs could be found:
 LoadBalancer Ingress:     a0252a5518b424485901b8f760e39a07-2139813722.us-west-2.elb.amazonaws.com
 ![pipeline screen19](screenshots/screenshot19_cd_pipeline.jpg)
 
 - And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen20](screenshots/screenshot20_green_lb_url.jpg)
-
+![pipeline screen21](screenshots/screenshot21_blue_lb_url.jpg)
 
 
 
