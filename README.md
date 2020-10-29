@@ -114,6 +114,7 @@ or
 <b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working. </b>
 
 - We will perform Green-Blue deployment by running pipeline EKS-GB-deployment (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
+![pipeline screen16](screenshots/screenshot16_jenkins_jobs.jpg)
 <i>[ also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder ]</i>
 ![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
 
@@ -131,5 +132,5 @@ And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen15](screenshots/screenshot15_eks_rolling_03.jpg)
 - we can see that LoadBalancer URL shows us updated web app:
 ![pipeline screen14](screenshots/screenshot14_eks_rolling_02.jpg)
-============================================================================
+=========================================================================
 
