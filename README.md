@@ -109,7 +109,7 @@ or
 - run eks_cluster_ceate.sh script <i> [i've excluded this step from pipeline - not to run it each time, because it takes much time] </i>:<br>
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
 
- it will deploy the new cluster "eksctl-capstone-cluster" to AWS EKS:
+ it will deploy the new stack "eksctl-capstone-cluster" to AWS EKS:
 ![pipeline screen8](screenshots/screenshot08_eks_cluster_01.jpg) 
  and nodegroup "eksctl-capstone-nodegroup-linux-nodes" according to settings in the script:
 ![pipeline screen9](screenshots/screenshot09_eks_cluster_02.jpg) 
@@ -121,7 +121,7 @@ or
 - We will perform Green-Blue deployment by running pipeline EKS-GB-deployment (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
 ![pipeline screen16](screenshots/screenshot16_jenkins_jobs.jpg)
 <i>[ also it could be done by two separate Jenkins jobs 'eks-deployment-(green/blue)', 
-jenkinsfiles could be found in eks folder - 'jenkinsfile_eks_(green/bue).txt'
+jenkinsfiles is here  - 'eks/jenkinsfile_eks_(green/bue).txt'
 or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-(green/blue).yaml' & 'svc-(green/blue).yaml' from 'eks' folder ]</i>
 ![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
 
