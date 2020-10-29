@@ -37,11 +37,11 @@ pipeline {
 				}
 			}
 
-			stage('Run docker container') {
+			stage('Run docker container - OFF') {
 			steps {
 				sh 'echo "Running builded image"'
 				withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-					sh "docker run -d -p 8888:8888 --name capstone_green ${env.dockerUsername}/capstone_green"
+					echo 'sh "docker run -d -p 8888:8888 --name capstone_green ${env.dockerUsername}/capstone_green"'
 					sh "date >> docker_ps_output.txt"
 					sh "docker ps >> docker_ps_output.txt" 
 					}
