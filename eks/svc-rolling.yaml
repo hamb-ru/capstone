@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb-rolling
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    targetPort: 8888
+    protocol: TCP
+  selector:
+    app: nginx
+  type: LoadBalancer

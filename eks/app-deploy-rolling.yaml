@@ -1,0 +1,27 @@
+# https://kubernetes.io/docs/tasks/run-application/run-stateless-application-deployment/
+# https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eks-deployment-rolling
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 4 # tells deployment to run 4 pods matching the template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 30%
+      maxUnavailable: 30%
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: hamb/capstone
+          ports:
+          - name: http
+            containerPort: 8888

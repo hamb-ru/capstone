@@ -74,20 +74,20 @@ Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Amazon EC2 plugi
 Create CI pipeline from Jenkinsfile. 
 ![pipeline screen1](screenshots/screenshot01_successful_pipeline.jpg)
 It will have the following steps: 
-- Lint Dockerfile with hadolint [failed Linting screenshot below]
+- Lint Dockerfile with hadolint <i> [failed Linting screenshot below] </i>
 ![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg)
-- Lint HTML with tidy [failed Linting screenshot below]
+- Lint HTML with tidy <i> [failed Linting screenshot below] </i>
 ![pipeline screen3](screenshots/screenshot03_failed_tidy_check.jpg)
 - Build Docker image with dummy web site running on nginx
 ![pipeline screen4](screenshots/screenshot04_successful_build.jpg)
 - Run docker container from builded image (https://dmalinov-capstone.s3.us-west-2.amazonaws.com/docker_ps_output.txt)
-- Push image to docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
+- Push image to the docker hub (https://hub.docker.com/repository/docker/hamb/capstone)
 - Security Scan of builded image with AquaMicroscanner (https://dmalinov-capstone.s3.us-west-2.amazonaws.com/scanlatest.html)
 - Upload artefacts to AWS S3 bucket (info about running docker container and image testing output)
 
-## CD Pipeline
+## CD Pipelines
 There could be two ways: 
-1) Deploy kubernetes cluster to local minikube. 
+<b> 1) Deploy kubernetes cluster to local minikube. </b>
 Green/Blue deployment is implemented by running two different run_kubernetes_(green/blue).sh scripts with different forwarded ports:
 	- minikube start
 	- run_kubernetes_green.sh
@@ -98,7 +98,7 @@ Green/Blue deployment is implemented by running two different run_kubernetes_(gr
 
 or
 
-2) Deploy kubernetes cluster to AWS EKS with eksctl { https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html }
+<b> 2) Deploy kubernetes cluster to AWS EKS with eksctl { https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html } </b>
 - make sure that AWS CLI is installed (it's pre-installed on AWS AMI) and eksctl installed ('make aws-eksctl' if not yet)
 - configure AWS CLI <br>
 - appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc [i did it manually via AWS IAM]
@@ -111,17 +111,17 @@ or
  so we will see 3 new ec2 instances running
 ![pipeline screen10](screenshots/screenshot10_eks_cluster_03.jpg)
 
-<b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working.</b>
+- After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working.
 
-We will perform Green-Blue deployment by running pipeline EKS-deployment-GB (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
-<i>[also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder]</i>
+- We will perform Green-Blue deployment by running pipeline EKS-deployment-GB (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
+<i>[ also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder ]</i>
 ![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
 
 In the post-deployment output stage we can see LoadBalancer's URLs for both deploymens:
 - Green LoadBalancer Ingress:     a97b94e2a73cb4c29a8970b9fade5dc3-409427701.us-west-2.elb.amazonaws.com
 - Blue LoadBalancer Ingress:      a26670057acda461aaa6579783f96894-58824717.us-west-2.elb.amazonaws.com
-And we can check in the browser how our Green/Blue apps were deployed:
-![pipeline screen11](screenshots/screenshot12_eks_green-blue_02.jpg)
+And we can check our Green/Blue apps deployments in the browser:
+![pipeline screen12](screenshots/screenshot12_eks_green-blue_02.jpg)
 
 
 ============================================================================
