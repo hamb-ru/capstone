@@ -11,11 +11,11 @@ COPY nginx/htdocs/ /usr/share/nginx/html
 ## Step 3:
 # Install packages from requirements.txt
 # hadolint ignore=DL3013
-RUN apk add python3 py3-pip
-RUN apk update
-RUN pip install --upgrade pip
+#RUN apk add python3 py3-pip
+#RUN apk update
+#RUN pip install --upgrade pip
 #RUN pip install --trusted-host pypi.python.org -r requirements.txt
-RUN pip install --trusted-host pypi.python.org pylint 
+#RUN pip install --trusted-host pypi.python.org pylint 
 
 ## Step 4:
 # Expose port 8888
