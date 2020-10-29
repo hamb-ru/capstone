@@ -104,17 +104,17 @@ or
 - appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc [i did it manually via AWS IAM]
 - run eks_cluster_ceate.sh script:
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
- it will deploy to EKS new cluster "eksctl-capstone-cluster"
+ it will deploy the new cluster "eksctl-capstone-cluster" to AWS EKS
 ![pipeline screen8](screenshots/screenshot08_eks_cluster_01.jpg) 
  and nodegroup "eksctl-capstone-nodegroup-linux-nodes" according to settings in the script 
 ![pipeline screen9](screenshots/screenshot09_eks_cluster_02.jpg) 
  so we will see 3 new ec2 instances running
 ![pipeline screen10](screenshots/screenshot10_eks_cluster_03.jpg)
 
-After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update is working.
+<b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working.</b>
 
-We will perform Green-Blue deployment by running pipeline EKS-deployment-GB (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt')
-[also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer service - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder]
+We will perform Green-Blue deployment by running pipeline EKS-deployment-GB (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
+<i>[also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder]</i>
 ![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
 
 In the post-deployment output stage we can see LoadBalancer's URLs for both deploymens:
