@@ -106,7 +106,7 @@ or
 - make sure AWS EKSCTL installed ('make aws-eksctl' if not yet)
 - configure AWS CLI ('aws configure')
 - appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc <i> [i did it manually via AWS IAM] </i>
-- run eks_cluster_ceate.sh script <i> [i excluded this step from pipeline because it takes much time] </i>:<br>
+- run eks_cluster_ceate.sh script <i> [i've excluded this step from pipeline - not to run it each time, because it takes much time] </i>:<br>
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
 
  it will deploy the new cluster "eksctl-capstone-cluster" to AWS EKS:
