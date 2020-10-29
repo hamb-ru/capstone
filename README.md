@@ -2,7 +2,7 @@
 ################################   Capstone Project   ##############################
 ############################################################################
 
-						# Capstone Project Overview
+#					# Capstone Project Overview
 
 In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:
 
@@ -58,20 +58,20 @@ Before you submit your project, please make sure you have checked all of your wo
 
 ============================================================================
 
-						# Project implementation
+#					 Project implementation
 
 ## Initial setup
 To start deploying/exploring the project we need any linux machine to run Jenkins and other attendant software (I've used EC2 t2.large instance in AWS).
 As far AMI Linux image does not have git installed initially we need either to install it manually (sudo yum install git) and clone this repo or just copy the Makefile to the machine.
 
-- Run 'make env' to install git, python, docker, jenkins, hadolint, tidy, aws-eksctland dependencies.
+- Run 'make env' to install git, python, docker, jenkins, hadolint, tidy, aws-eksctl and dependencies.
 - Re-login or run another shell, to activate user's group 'docker' if minikube will be run locally for debugging. 
 
 ## Jenkins
 Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Amazon EC2 plugin, Aqua MicroScanner, Blue Ocean) and credentials for AWS and DOCKER hub access
 
 ## CI Pipeline
-Create CI pipeline from Jenkinsfile. 
+Create CI pipeline from Jenkinsfile in projects root folder. 
 ![pipeline screen1](screenshots/screenshot01_successful_pipeline.jpg)
 It will have the following steps: 
 - Lint Dockerfile with hadolint <i> [failed Linting screenshot below] </i>
@@ -86,8 +86,10 @@ It will have the following steps:
 - Upload artefacts to AWS S3 bucket (info about running docker container and image testing output)
 
 ## CD Pipelines
-There could be two ways: 
-<b> 1) Deploy kubernetes cluster to local minikube. </b>
+There could be two ways for CD imaplementation: 
+
+<b> 1) Deploy kubernetes cluster to local minikube. </b><br>
+
 Green/Blue deployment is implemented by running two different run_kubernetes_(green/blue).sh scripts with different forwarded ports:
 	- minikube start
 	- run_kubernetes_green.sh
@@ -98,10 +100,10 @@ Green/Blue deployment is implemented by running two different run_kubernetes_(gr
 
 or
 
-<b> 2) Deploy kubernetes cluster to AWS EKS with eksctl { https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html } </b>
+<b> 2) Deploy kubernetes cluster to AWS EKS with eksctl { https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html } </b><br>
 - make sure that AWS CLI is installed (it's pre-installed on AWS AMI) and eksctl installed ('make aws-eksctl' if not yet)
 - configure AWS CLI <br>
-- appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc [i did it manually via AWS IAM]
+- appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc <i> [i did it manually via AWS IAM] </i>
 - run eks_cluster_ceate.sh script:
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
  it will deploy the new cluster "eksctl-capstone-cluster" to AWS EKS
