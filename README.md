@@ -118,8 +118,8 @@ or
 ![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
 
 In the post-deployment output stage we can see LoadBalancer's URLs for both deploymens:
-- Green LoadBalancer Ingress:     a97b94e2a73cb4c29a8970b9fade5dc3-409427701.us-west-2.elb.amazonaws.com
-- Blue LoadBalancer Ingress:      a26670057acda461aaa6579783f96894-58824717.us-west-2.elb.amazonaws.com
+- Green - LoadBalancer Ingress:     a97b94e2a73cb4c29a8970b9fade5dc3-409427701.us-west-2.elb.amazonaws.com
+- Blue - LoadBalancer Ingress:      a26670057acda461aaa6579783f96894-58824717.us-west-2.elb.amazonaws.com <br>
 And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen12](screenshots/screenshot12_eks_green-blue_02.jpg)
 
