@@ -32,7 +32,7 @@ pipeline {
 			steps {
 				sh 'echo "Push builded image to docker.hub"'
 				withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-					sh "docker push ${env.dockerUsername}/capstone"
+					sh "docker push ${env.dockerUsername}/capstone_green"
 					}
 				}
 			}
@@ -52,7 +52,7 @@ pipeline {
 
 		stage('Security Scan') {
 			steps {
-				aquaMicroscanner(imageName: 'hamb/capstone', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
+				aquaMicroscanner(imageName: 'hamb/capstone_green', notCompliesCmd: 'exit 1', onDisallowed: 'fail', outputFormat: 'html')
 			}
 		}
 
