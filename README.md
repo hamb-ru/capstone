@@ -110,7 +110,7 @@ Create CI pipeline from Jenkinsfile in projects root folder.
 
 
 ## CD Pipeline
-- Any git push in one of Green/Blue branches automatically starts appropriate CI pipeline (described above) with linting, building docker container and pushing it to Docker hub. 
+- Any git push in one of Green/Blue branches automatically starts appropriate CI pipeline (described above) with linting, building docker container and pushing the image to Docker hub. 
 ![pipeline screen17](screenshots/screenshot17_pipeline_from_git.jpg)
 
 - After successfull finish of CI pipeline one of Green/Blue CD pipelines ('eks-deployment-(green/blue)') triggers accordingly:
