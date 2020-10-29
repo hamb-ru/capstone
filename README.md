@@ -118,7 +118,7 @@ or
 
 <b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling updates are working. </b>
 
-- We will perform Green-Blue deployment by running pipeline 'EKS-GB-deployment' (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
+- We will perform Green-Blue deployment by running pipeline <b>'EKS-GB-deployment'</b> (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
 ![pipeline screen16](screenshots/screenshot16_jenkins_jobs.jpg)
 <i>[ also it could be done by two separate Jenkins jobs 'eks-deployment-(green/blue)', 
 jenkinsfiles is here  - 'eks/jenkinsfile_eks_(green/bue).txt'
@@ -132,7 +132,7 @@ In the post-deployment output stage we can see LoadBalancer's URLs for both depl
 And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen12](screenshots/screenshot12_eks_green-blue_02.jpg)
 
-<b> Now it's time to check Rolling Update by running Jenkins pipeline EKS-rolling-deployment (jenkinsfile - 'eks/jenkinsfile_eks_rolling.txt') </b><br>
+<b> Now it's time to check Rolling Update by running Jenkins pipeline <b>'EKS-rolling-deployment'</b> (jenkinsfile - 'eks/jenkinsfile_eks_rolling.txt') </b><br>
 - Initial deployment will be done from Green deployment image:
 ![pipeline screen13](screenshots/screenshot13_eks_rolling_01.jpg)
 - Than we are changing our nginx app (update container image from hamb/capstone_green to hamb/capstone) and re-run pipeline:
