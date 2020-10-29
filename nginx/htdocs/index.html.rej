@@ -1,0 +1,21 @@
+diff a/nginx/htdocs/index.html b/nginx/htdocs/index.html	(rejected hunks)
+@@ -1,14 +1,19 @@
+   
+ <!DOCTYPE html>
+ <html>
+     <head>
+ 	    <title>Dummy WebApp for Udacity Capstone Project</title>
+     </head>
+     <body>
+ 	    <h2> Cloud DevOps Engineer Program </h2>
+ 		<a href="https://classroom.udacity.com/nanodegrees/nd9991-ent/dashboard/overview"><img src="udacity.jpg" alt="udacity.com"></a><br>
++<<<<<<< HEAD
+ 	    <h1><font color=green size=15><b> GREEN DEPLOYMENT </b></font></h1><br>
+ 	    <h1><font color=green size=5><b> update from GREEN branch </b></font></h1><br>
++=======
++	    <h1><font color=blue size=15><b> BLUE DEPLOYMENT </b></font></h1><br>
++	    <h1><font color=blue size=10><b> update from BLUE branch </b></font></h1><br>
++>>>>>>> e834eb57e06660585cb399fc878c2464083fa5dc
+ 		*** Capstone Project dummy web app from Dmitry Malinovsky ***
+     </body>
+ </html>
