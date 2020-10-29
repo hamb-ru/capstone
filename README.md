@@ -118,7 +118,7 @@ or
 
 <b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling updates are working. </b>
 
-- We will perform Green-Blue deployment by running pipeline EKS-GB-deployment (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
+- We will perform Green-Blue deployment by running pipeline 'EKS-GB-deployment' (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
 ![pipeline screen16](screenshots/screenshot16_jenkins_jobs.jpg)
 <i>[ also it could be done by two separate Jenkins jobs 'eks-deployment-(green/blue)', 
 jenkinsfiles is here  - 'eks/jenkinsfile_eks_(green/bue).txt'
