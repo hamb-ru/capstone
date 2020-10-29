@@ -2,7 +2,7 @@
 ################################   Capstone Project   ##############################
 ############################################################################
 
-#					# Capstone Project Overview
+#					 Capstone Project Overview
 
 In this project you will apply the skills and knowledge which were developed throughout the Cloud DevOps Nanodegree program. These include:
 
@@ -73,7 +73,8 @@ Configure installed Jenkins with pluggins (Pipeline: AWS Steps, Amazon EC2 plugi
 ## CI Pipeline
 Create CI pipeline from Jenkinsfile in projects root folder. 
 ![pipeline screen1](screenshots/screenshot01_successful_pipeline.jpg)
-It will have the following steps: 
+
+<b>It will have the following steps: </b><br>
 - Lint Dockerfile with hadolint <i> [failed Linting screenshot below] </i>
 ![pipeline screen2](screenshots/screenshot02_failed_hadolint_check.jpg)
 - Lint HTML with tidy <i> [failed Linting screenshot below] </i>
@@ -86,14 +87,14 @@ It will have the following steps:
 - Upload artefacts to AWS S3 bucket (info about running docker container and image testing output)
 
 ## CD Pipelines
-There could be two ways for CD imaplementation: 
+There could be two ways for CD implementation: 
 
 <b> 1) Deploy kubernetes cluster to local minikube. </b><br>
 
-Green/Blue deployment is implemented by running two different run_kubernetes_(green/blue).sh scripts with different forwarded ports:
-	- minikube start
-	- run_kubernetes_green.sh
-	- run_kubernetes_blue.sh
+Green/Blue deployment is implemented by running two different run_kubernetes_(green/blue).sh scripts with different forwarded ports:<br>
+- minikube start
+- run_kubernetes_green.sh
+- run_kubernetes_blue.sh
 ![pipeline screen5](screenshots/screenshot05_minikube_deployment.jpg)
 - minikube-deployment pipeline could be triggered after successfull finish of CI pipeline or run manually.
 ![pipeline screen6](screenshots/screenshot06_green-blue.jpg)
@@ -101,23 +102,27 @@ Green/Blue deployment is implemented by running two different run_kubernetes_(gr
 or
 
 <b> 2) Deploy kubernetes cluster to AWS EKS with eksctl { https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html } </b><br>
-- make sure that AWS CLI is installed (it's pre-installed on AWS AMI) and eksctl installed ('make aws-eksctl' if not yet)
-- configure AWS CLI <br>
+- make sure that AWS CLI is installed (it's pre-installed on AWS AMI)
+- make sure AWS EKSCTL installed ('make aws-eksctl' if not yet)
+- configure AWS CLI
 - appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc <i> [i did it manually via AWS IAM] </i>
-- run eks_cluster_ceate.sh script:
+- run eks_cluster_ceate.sh script <i> [i excluded this step from pipeline because it takes much time] </i>:<br>
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
- it will deploy the new cluster "eksctl-capstone-cluster" to AWS EKS
+
+ it will deploy the new cluster "eksctl-capstone-cluster" to AWS EKS:
 ![pipeline screen8](screenshots/screenshot08_eks_cluster_01.jpg) 
- and nodegroup "eksctl-capstone-nodegroup-linux-nodes" according to settings in the script 
+ and nodegroup "eksctl-capstone-nodegroup-linux-nodes" according to settings in the script:
 ![pipeline screen9](screenshots/screenshot09_eks_cluster_02.jpg) 
- so we will see 3 new ec2 instances running
+ so we will see 3 new ec2 m5.large instances (capstone-linux-nodes-Node) running:
 ![pipeline screen10](screenshots/screenshot10_eks_cluster_03.jpg)
 
-<b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working. </b>
+<b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling updates are working. </b>
 
 - We will perform Green-Blue deployment by running pipeline EKS-GB-deployment (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
 ![pipeline screen16](screenshots/screenshot16_jenkins_jobs.jpg)
-<i>[ also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder ]</i>
+<i>[ also it could be done by two separate Jenkins jobs 'eks-deployment-(green/blue)', 
+jenkinsfiles could be found in eks folder - 'jenkinsfile_eks_(green/bue).txt'
+or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-(green/blue).yaml' & 'svc-(green/blue).yaml' from 'eks' folder ]</i>
 ![pipeline screen11](screenshots/screenshot11_eks_green-blue_01.jpg)
 
 In the post-deployment output stage we can see LoadBalancer's URLs for both deploymens:
@@ -134,5 +139,6 @@ And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen15](screenshots/screenshot15_eks_rolling_03.jpg)
 - we can see that LoadBalancer URL shows us updated web app:
 ![pipeline screen14](screenshots/screenshot14_eks_rolling_02.jpg)
+
 =========================================================================
 
