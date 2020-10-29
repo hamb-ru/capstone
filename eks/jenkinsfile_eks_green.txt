@@ -1,22 +1,24 @@
 pipeline {
-    agent any
-    stages {
-        stage('Green Deployment') {
-            steps {
-                echo 'Deploying Green app with LoadBalancer to EKS cluster'
-                withAWS(credentials: 'aws-static', region: 'us-west-2') {
-                    sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
-                    sh "kubectl apply -f ./app-deploy-green.yaml --record"
-                    sh "kubectl apply -f ./svc-green.yaml"
-                    sh "kubectl rollout status deployment/eks-deployment-green"
-                    sh "kubectl get deployments"
-                    sh "kubectl describe deployments"
-                    sh "kubectl get rs"
-                    sh "kubectl get pods --show-labels"
-                    sh "kubectl get services"
-                    sh "kubectl describe svc nginx-lb-green"
-                }
-            }
-        }
-    }
-} 
+	agent any
+	stages {
+		stage('Green Deployment') {
+			steps {
+				echo 'Deploying Green app with LoadBalancer to EKS cluster'
+				withAWS(credentials: 'aws-static', region: 'us-west-2') {
+					sh "rm -rf ./capstone"
+					sh "git clone https://github.com/hamb-ru/capstone"
+					sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
+					sh "kubectl apply -f ./capstone/eks/app-deploy-green.yaml --record"
+					sh "kubectl apply -f ./capstone/eks/svc-green.yaml"
+					sh "kubectl rollout status deployment/eks-deployment-green"
+					sh "kubectl get deployments"
+					sh "kubectl describe deployments"
+					sh "kubectl get rs"
+					sh "kubectl get pods --show-labels"
+					sh "kubectl get services"
+					sh "kubectl describe svc nginx-lb-green"
+				}
+			}
+		}
+	}
+}
