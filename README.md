@@ -104,7 +104,7 @@ or
 <b> 2) Deploy kubernetes cluster to AWS EKS with eksctl { https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html } </b><br>
 - make sure that AWS CLI is installed (it's pre-installed on AWS AMI)
 - make sure AWS EKSCTL installed ('make aws-eksctl' if not yet)
-- configure AWS CLI
+- configure AWS CLI ('aws configure')
 - appropriate policies should be attached to IAM:user - IAM, EKS, EC2, VPC, etc <i> [i did it manually via AWS IAM] </i>
 - run eks_cluster_ceate.sh script <i> [i excluded this step from pipeline because it takes much time] </i>:<br>
 ![pipeline screen7](screenshots/screenshot07_eks_cluster_00.jpg)
