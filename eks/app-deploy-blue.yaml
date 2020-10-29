@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: nginx-blue
-          image: hamb/capstone_blue
+          image: hamb/capstone_blue:latest
           ports:
           - name: http
             containerPort: 8888
