@@ -20,7 +20,7 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
 					sh "docker login -u ${env.dockerUsername} -p ${env.dockerPassword}"
 					sh "echo 'remove docker container if exists'"
-					sh "docker rm -f capstone || true"
+					sh "docker rm -f capstone_blue || true"
 					sh "docker build --tag ${env.dockerUsername}/capstone_blue ."
 				}
 			}
