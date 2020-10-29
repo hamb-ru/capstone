@@ -111,7 +111,7 @@ or
  so we will see 3 new ec2 instances running
 ![pipeline screen10](screenshots/screenshot10_eks_cluster_03.jpg)
 
-- After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working.
+<b>After we've deployed EKS cluster we could deploy our nginx dummy app to the k8s cluster and check how Green-Blue or Rolling Update are working. </b>
 
 - We will perform Green-Blue deployment by running pipeline EKS-GB-deployment (jenkinsfile - 'eks/jenkinsfile_eks_gb.txt') <br>
 <i>[ also it could be done by two separate Jenkins jobs - 'jenkinsfile_eks_green.txt' & 'jenkinsfile_eks_blue.txt' or even by manually applying yaml files with app deployment and LoadBalancer services - 'app-deploy-<COLOR>.yaml' & 'svc-<COLOR>.yaml' from 'eks' folder ]</i>
@@ -119,15 +119,16 @@ or
 
 In the post-deployment output stage we can see LoadBalancer's URLs for both deploymens:
 - Green - LoadBalancer Ingress:     a97b94e2a73cb4c29a8970b9fade5dc3-409427701.us-west-2.elb.amazonaws.com
-- Blue - LoadBalancer Ingress:      a26670057acda461aaa6579783f96894-58824717.us-west-2.elb.amazonaws.com <br>
+- Blue - LoadBalancer Ingress:      a26670057acda461aaa6579783f96894-58824717.us-west-2.elb.amazonaws.com
+
 And we can check our Green/Blue apps deployments in the browser:
 ![pipeline screen12](screenshots/screenshot12_eks_green-blue_02.jpg)
 
-- Now it's time to check Rolling Update by running pipeline EKS-rolling-deployment (jenkinsfile - 'eks/jenkinsfile_eks_rolling.txt') <br>
+<b> Now it's time to check Rolling Update by running pipeline EKS-rolling-deployment (jenkinsfile - 'eks/jenkinsfile_eks_rolling.txt') </b><br>
 - Initial deployment will be done from Green deployment image:
 ![pipeline screen13](screenshots/screenshot13_eks_rolling_01.jpg)
 - Than we are changing our nginx app (update container image from hamb/capstone_green to hamb/capstone) and re-run pipeline:
-![pipeline screen15](screenshots/screenshot14_eks_rolling_03.jpg)
+![pipeline screen15](screenshots/screenshot15_eks_rolling_03.jpg)
 - we can see that LoadBalancer URL shows us updated web app:
 ![pipeline screen14](screenshots/screenshot14_eks_rolling_02.jpg)
 ============================================================================
