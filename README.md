@@ -140,5 +140,5 @@ And we can check our Green/Blue apps deployments in the browser:
 - we can see that LoadBalancer URL shows us updated web app:
 ![pipeline screen14](screenshots/screenshot14_eks_rolling_02.jpg)
 
-=========================================================================
+===========================================================================
 
