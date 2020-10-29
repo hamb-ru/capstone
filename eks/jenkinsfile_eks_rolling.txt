@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Rolling Update Deployment') {
+            steps {
+                echo 'Deploying app with LoadBalancer using Rolling Update to EKS cluster'
+                withAWS(credentials: 'aws-static', region: 'us-west-2') {
+                    sh "aws eks --region us-west-2 update-kubeconfig --name capstone"
+                    sh "kubectl apply -f ./app-deploy-rolling.yaml --record"
+                    sh "kubectl apply -f ./svc-rolling.yaml"
+                    sh "kubectl rollout status deployment/eks-deployment-rolling"
+                    sh "kubectl get deployments"
+                    sh "kubectl describe deployments eks-deployment-rolling"
+                    sh "kubectl get rs"
+                    sh "kubectl get pods --show-labels"
+                    sh "kubectl get services"
+                    sh "kubectl describe svc nginx-lb-rolling"
+                }
+            }
+        }
+    }
+} 
